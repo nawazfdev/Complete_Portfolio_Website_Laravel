@@ -11,31 +11,36 @@
         <div class="card-body">
 
             <h4 class="card-title">Change Password </h4>
+@if(count($errors))
+@foreach($errors->all() as $error)
+<p class="alert alert-danger alert-dismissible fade show">{{$error}}</p>
+@endforeach
 
-            <form method="post" action="{{ route('store.profile') }}" enctype="multipart/form-data">
+@endif
+            <form method="post" action="{{ route('update.password') }}">
                 @csrf
 
             <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
+                <label for="example-text-input" class="col-sm-2 col-form-label">Old Password</label>
                 <div class="col-sm-10">
-                    <input name="name" class="form-control" type="text" value="{{ $editData->name }}"  id="example-text-input">
+                    <input name="old_password" class="form-control" type="password" value=""  id="old_password">
                 </div>
             </div>
             <!-- end row -->
 
               <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">User Email</label>
+                <label for="example-text-input" class="col-sm-2 col-form-label">New Password</label>
                 <div class="col-sm-10">
-                    <input name="email" class="form-control" type="text" value="{{ $editData->email }}"  id="example-text-input">
+                    <input name="new_password" class="form-control" type="password" value=""  id="new_password">
                 </div>
             </div>
             <!-- end row -->
 
 
               <div class="row mb-3">
-                <label for="example-text-input" class="col-sm-2 col-form-label">UserName</label>
+                <label for="example-text-input" class="col-sm-2 col-form-label">Conform Password</label>
                 <div class="col-sm-10">
-                    <input name="username" class="form-control" type="text" value="{{ $editData->username }}"  id="example-text-input">
+                    <input name="confirm_password" class="form-control" type="password" value=""  id="confirm_password">
                 </div>
             </div>
             <!-- end row -->
