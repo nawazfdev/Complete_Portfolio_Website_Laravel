@@ -1,8 +1,11 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\HomeSlide;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Home\HomeSliderController;
+
 
 
 /*
@@ -33,6 +36,17 @@ Route::controller(AdminController::class)->group(function () {
      Route::post('/store/profile', 'StoreProfile')->name('store.profile');
      Route::get('/password/change', 'passwordchange')->name('password.change');
      Route::post('/update/password', 'Updatepassword')->name('update.password');
+
+
+
+    
+});
+// Homeslide all Route
+Route::controller(HomeSliderController::class)->group(function () {
+    Route::get('/home/slide', 'HomeSlider')->name('home.slide');
+    Route::post('/update/slider', 'UpdateSlider')->name('update.slider');
+
+      
 
 
 
