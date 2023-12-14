@@ -21,7 +21,11 @@
             <li><a href="#">Portfolio Details</a></li>
         </ul>
     </li>
-    <li class="menu-item-has-children"><a href="{{ route('home.blog') }}">Our Blog</a>
+    <li class="menu-item-has-children"><a href="#">Our Blog</a>
+        <ul class="sub-menu">
+        <li class="menu-item-has-children"><a href="{{ route('home.blog') }}">Latest Article</a>
+        
+        </ul>
     </li>
     <li><a href="contact.html">contact me</a></li>
     </ul>
