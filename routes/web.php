@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Home\AboutController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TenantController;
 use App\Models\HomeSlide;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
@@ -9,7 +10,8 @@ use App\Http\Controllers\Home\HomeSliderController;
 use App\Http\Controllers\Home\PortfolioController;
 use App\Http\Controllers\Home\BlogCategoryController;
 use App\Http\Controllers\Home\BlogController;
-
+use App\Http\Controllers\Home\FooterController;
+use App\Http\Controllers\Home\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +26,7 @@ use App\Http\Controllers\Home\BlogController;
 
 Route::get('/', function () {
     return view('frontend.index');
+   
 });
 
 Route::get('/dashboard', function () {
@@ -32,6 +35,7 @@ Route::get('/dashboard', function () {
 
 
 // Admin all Route
+Route::middleware(['auth'])->group(function () {
 Route::controller(AdminController::class)->group(function () {
     Route::get('/admin/logout', 'destroy')->name('admin.logout');
      Route::get('/admin/profile', 'Profile')->name('admin.profile');
@@ -39,10 +43,7 @@ Route::controller(AdminController::class)->group(function () {
      Route::post('/store/profile', 'StoreProfile')->name('store.profile');
      Route::get('/password/change', 'passwordchange')->name('password.change');
      Route::post('/update/password', 'Updatepassword')->name('update.password');
-
-
-
-    
+    });
 });
 // Homeslide all Route
 Route::controller(HomeSliderController::class)->group(function () {
@@ -79,6 +80,8 @@ Route::controller(AboutController::class)->group(function () {
     Route::post('/update/portfolio', 'UpdatePortfolio')->name('update.protfolio');
     Route::get('/delete/portfolio/{id}', 'DeletePortfolio')->name('delete.portfolio');
     Route::get('/portfolio/details/{id}', 'PortfolioDetails')->name('portfolio.details');
+    Route::get('/portfolio', 'HomePortfolio')->name('home.portfolio');
+
 });
 // Blog Category All Routes 
 Route::controller(BlogCategoryController::class)->group(function () {
@@ -108,6 +111,21 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- 
+  // Footer All Route 
+Route::controller(FooterController::class)->group(function () {
+    Route::get('/footer/setup', 'FooterSetup')->name('footer.setup');
+    Route::post('/update/footer', 'UpdateFooter')->name('update.footer');
 
+});
+
+   // Contact All Route 
+    Route::controller(ContactController::class)->group(function () {
+        Route::get('/contact', 'Contact')->name('contact.me');
+        Route::post('/store/message', 'StoreMessage')->name('store.message');
+    Route::get('/contact/message', 'ContactMessage')->name('contact.message');   
+    Route::get('/delete/message/{id}', 'DeleteMessage')->name('delete.message');   
+
+
+    });
+Route::resource('tenants',TenantController::class);
 require __DIR__.'/auth.php';

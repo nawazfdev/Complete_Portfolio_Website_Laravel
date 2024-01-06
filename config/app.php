@@ -17,7 +17,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
-
+    'domain' => env('APP_DOMAIN', 'localhost'),
     /*
     |--------------------------------------------------------------------------
     | Application Environment
@@ -169,6 +169,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TenancyServiceProvider::class, // <-- here
+
+
     ])->toArray(),
 
     /*
